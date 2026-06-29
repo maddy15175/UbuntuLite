@@ -26,6 +26,9 @@ jobs:
     - name: Grant permission
       run: chmod +x gradlew
 
+    - name: List APK
+  run: find . -name "*.apk"
+  
     - name: Build APK
   run: ./gradlew assembleDebug
 
