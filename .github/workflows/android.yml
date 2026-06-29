@@ -10,29 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
 
-      - name: Grant permission
-        run: chmod +x gradlew
+    - name: Grant permission
+      run: chmod +x gradlew
 
-      - name: List APK
-        run: find . -name "*.apk"
+    - name: Build APK
+      run: ./gradlew assembleDebug
 
-      - name: Build APK
-        run: ./gradlew assembleDebug
+    - name: List APK
+      run: find . -name "*.apk"
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: UbuntuLite-APK
-          path: app/build/outputs/apk/debug/*.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: UbuntuLite-APK
+        path: app/build/outputs/apk/debug/app-debug.apk
